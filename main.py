@@ -3,6 +3,7 @@ import requests
 import json
 import pandas as pd
 import time
+import urllib
 
 st.markdown("![Alt Text](https://c.tenor.com/g5luJt5ki30AAAAC/fortune-teller-crystall-ball.gif)")
 st.title('Topic Suggestions')
@@ -63,6 +64,7 @@ if bulk_submitted:
     bulk_term_column = bulk_term_data.iloc[:,-1]
 
     for term in bulk_term_column:
+        term = urllib.parse.quote(term, safe='')
         print(term)
         load_bar_integer = 1/len(bulk_term_data.index)
         my_bar_counter += load_bar_integer
