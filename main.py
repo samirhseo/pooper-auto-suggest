@@ -76,7 +76,7 @@ if bulk_submitted:
            data[response[0]] = [i for i in response[1]]
            api_progress_counter += 1
 
-           if bulk_term_column[bulk_term_column == term].index0 == len(bulk_term_column)-1:
+           if bulk_term_column[bulk_term_column == term].index == len(bulk_term_column)-1:
                my_bar.progress(1.0)
            else:
                my_bar.progress(my_bar_counter+load_bar_integer)
