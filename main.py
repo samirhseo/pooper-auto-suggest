@@ -57,7 +57,7 @@ if bulk_submitted:
     download = []
     data = {}
     variations = ['what * ', 'is * ', 'who * ', 'how * ', 'does * ', 'why * ', 'can * ', 'where * ', 'when * ', '* ']
-    bulk_term_data = pd.read_csv(bulk_term,encoding='ascii',encoding_errors='replace')
+    bulk_term_data = pd.read_csv(bulk_term,encoding='ascii',encoding_errors='surrogatepass')
     print(bulk_term_data.iloc[0:-1,0])
     api_progress_counter = 0
     bulk_term_column = bulk_term_data.iloc[:,-1]
