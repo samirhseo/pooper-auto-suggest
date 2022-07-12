@@ -88,6 +88,7 @@ if bulk_submitted:
             download.append(value)
 
     df = pd.DataFrame({'suggest': download})
+    df = df.drop_duplicates()
     csv = convert_df(df)
     st.download_button(
         label="Download data as CSV",
