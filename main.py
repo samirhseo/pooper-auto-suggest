@@ -59,16 +59,22 @@ if bulk_submitted:
     variations = ['what * ', 'is * ', 'who * ', 'how * ', 'does * ', 'why * ', 'can * ', 'where * ', 'when * ', '* ']
     bulk_term_data = pd.read_csv(bulk_term,encoding='ascii',encoding_errors='replace')
     print(bulk_term_data.iloc[0:-1,0])
+    api_progress_counter = 0
 
     for term in bulk_term_data.iloc[:,-1]:
         print(term)
         load_bar_integer = 1/len(bulk_term_data.index)
         my_bar_counter += load_bar_integer
         for variant in variations:
+           if api_progress_counter = 50:
+               time.sleep(6)
+               api_progress_counter = 0
             response = json.loads(
                 requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
             data[response[0]] = [i for i in response[1]]
+            api_progress_counter += 1
             my_bar.progress(my_bar_counter+load_bar_integer)
+
 
 
     for _, values in data.items():
