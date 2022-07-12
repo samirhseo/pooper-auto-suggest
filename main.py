@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import json
 import pandas as pd
+import time
 
 st.markdown("![Alt Text](https://c.tenor.com/g5luJt5ki30AAAAC/fortune-teller-crystall-ball.gif)")
 st.title('Topic Suggestions')
@@ -21,6 +22,7 @@ with st.form("my_form"):
 with st.form("bulk_submit"):
     bulk_term = st.file_uploader("Upload CSV Here",key=1)
     bulk_submitted = st.form_submit_button("Submit")
+    my_bar = st.progress(0)
 
 if submitted:
     download = []
@@ -30,6 +32,7 @@ if submitted:
         response = json.loads(
             requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
         data[response[0]] = [i for i in response[1]]
+        time.sleep(0.1)
 
     for _, values in data.items():
         for value in values:
@@ -53,15 +56,19 @@ if bulk_submitted:
     download = []
     data = {}
     variations = ['what * ', 'is * ', 'who * ', 'how * ', 'does * ', 'why * ', 'can * ', 'where * ', 'when * ', '* ']
-    bulk_term_data = pd.read_csv(bulk_term)
+    bulk_term_data = pd.read_csv(bulk_term,encoding='ascii',encoding_errors='replace')
     print(bulk_term_data.iloc[0:-1,0])
 
     for term in bulk_term_data.iloc[:,-1]:
         print(term)
+        load_bar_integer = len(bulk_term_data.index)
         for variant in variations:
             response = json.loads(
                 requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
             data[response[0]] = [i for i in response[1]]
+        for x in range(load_bar_integer):
+            my_bar.progress(x+1)
+
 
     for _, values in data.items():
         for value in values:
