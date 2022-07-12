@@ -70,11 +70,11 @@ if bulk_submitted:
                time.sleep(6)
                api_progress_counter = 0
 
-            response = json.loads(
-                requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
-            data[response[0]] = [i for i in response[1]]
-            api_progress_counter += 1
-            my_bar.progress(my_bar_counter+load_bar_integer)
+           response = json.loads(
+               requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
+           data[response[0]] = [i for i in response[1]]
+           api_progress_counter += 1
+           my_bar.progress(my_bar_counter+load_bar_integer)
 
 
 
