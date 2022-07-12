@@ -66,9 +66,10 @@ if bulk_submitted:
         load_bar_integer = 1/len(bulk_term_data.index)
         my_bar_counter += load_bar_integer
         for variant in variations:
-           if api_progress_counter = 50:
+           if api_progress_counter == 50:
                time.sleep(6)
                api_progress_counter = 0
+
             response = json.loads(
                 requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
             data[response[0]] = [i for i in response[1]]
