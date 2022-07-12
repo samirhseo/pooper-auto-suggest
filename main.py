@@ -75,6 +75,7 @@ if bulk_submitted:
                requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
            data[response[0]] = [i for i in response[1]]
            api_progress_counter += 1
+
            if bulk_term_column[bulk_term_column == term].index0 == len(bulk_term_column)-1:
                my_bar.progress(1.0)
            else:
