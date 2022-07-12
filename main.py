@@ -61,13 +61,13 @@ if bulk_submitted:
 
     for term in bulk_term_data.iloc[:,-1]:
         print(term)
-        load_bar_integer = len(bulk_term_data.index)
+        load_bar_integer = 100/len(bulk_term_data.index)
         for variant in variations:
             response = json.loads(
                 requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
             data[response[0]] = [i for i in response[1]]
-        for x in range(load_bar_integer):
-            my_bar.progress(x+1)
+        for x in range(100):
+            my_bar.progress(x+load_bar_integer)
 
 
     for _, values in data.items():
