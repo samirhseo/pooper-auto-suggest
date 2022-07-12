@@ -76,7 +76,8 @@ if bulk_submitted:
 
            response = json.loads(
                requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term_encoded}').text)
-           data[response[0]] = [i for i in response[1]]
+#           data[response[0]] = [i for i in response[1]]
+           data[term] = [i for i in response[1]]
            api_progress_counter += 1
 
            if bulk_term_column[bulk_term_column == term].index == len(bulk_term_column)-1:
@@ -84,19 +85,18 @@ if bulk_submitted:
            else:
                my_bar.progress(my_bar_counter+load_bar_integer)
 
-
+#add SEMRUSH volume for every found term.
 
     for _, values in data.items():
         for value in values:
             download.append(value)
- #           term_keys.append(_)
+            term_keys.append(_)
 
 
 
-    #df = pd.DataFrame({'original':term_keys,'suggest': download})
-    df = pd.DataFrame({'suggest': download})
-
-    df = df.drop_duplicates()
+    df = pd.DataFrame({'original':term_keys,'suggest': download})
+   # df = pd.DataFrame({'suggest': download})
+    df = df.drop_duplicates(subset=['suggest'], keep=False)
     csv = convert_df(df)
     st.download_button(
         label="Download data as CSV",
