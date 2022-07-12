@@ -89,7 +89,7 @@ if bulk_submitted:
         for value in values:
             download.append(value)
 
-    df = pd.DataFrame({'original':term, 'suggest': download)
+    df = pd.DataFrame({'original':term,'suggest': download})
     df = df.drop_duplicates()
     csv = convert_df(df)
     st.download_button(
