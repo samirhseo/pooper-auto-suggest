@@ -64,7 +64,7 @@ if bulk_submitted:
     bulk_term_column = bulk_term_data.iloc[:,-1]
 
     for term in bulk_term_column:
-        term = urllib.parse.quote(term, safe='')
+        term_encoded = urllib.parse.quote(term, safe='')
         print(term)
         load_bar_integer = 1/len(bulk_term_data.index)
         my_bar_counter += load_bar_integer
@@ -74,7 +74,7 @@ if bulk_submitted:
                api_progress_counter = 0
 
            response = json.loads(
-               requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
+               requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term_encoded}').text)
            data[response[0]] = [i for i in response[1]]
            api_progress_counter += 1
 
