@@ -89,11 +89,13 @@ if bulk_submitted:
     for _, values in data.items():
         for value in values:
             download.append(value)
-            term_keys.append(_)
+ #           term_keys.append(_)
 
 
 
-    df = pd.DataFrame({'original':term_keys,'suggest': download})
+    #df = pd.DataFrame({'original':term_keys,'suggest': download})
+    df = pd.DataFrame({'suggest': download})
+
     df = df.drop_duplicates()
     csv = convert_df(df)
     st.download_button(
