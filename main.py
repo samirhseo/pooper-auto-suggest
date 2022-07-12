@@ -23,6 +23,7 @@ with st.form("bulk_submit"):
     bulk_term = st.file_uploader("Upload CSV Here",key=1)
     bulk_submitted = st.form_submit_button("Submit")
     my_bar = st.progress(0.0)
+    my_bar_counter = 0.0
 
 if submitted:
     download = []
@@ -62,11 +63,12 @@ if bulk_submitted:
     for term in bulk_term_data.iloc[:,-1]:
         print(term)
         load_bar_integer = 1/len(bulk_term_data.index)
+        my_bar_counter += load_bar_integer
         for variant in variations:
             response = json.loads(
                 requests.get(f'http://suggestqueries.google.com/complete/search?client=firefox&q={variant}{term}').text)
             data[response[0]] = [i for i in response[1]]
-            my_bar.progress(x+1.0)
+            my_bar.progress(my_bar_counter+load_bar_integer)
 
 
     for _, values in data.items():
@@ -87,3 +89,4 @@ if bulk_submitted:
         for value in values:
             st.write(value)
 
+    st.balloons()
