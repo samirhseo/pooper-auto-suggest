@@ -56,7 +56,7 @@ if submitted:
 
 if bulk_submitted:
     download = []
-    terms = []
+    term_keys = []
     data = {}
     variations = ['what * ', 'is * ', 'who * ', 'how * ', 'does * ', 'why * ', 'can * ', 'where * ', 'when * ', '* ']
     bulk_term_data = pd.read_csv(bulk_term,encoding_errors='xmlcharrefreplace')
@@ -85,9 +85,13 @@ if bulk_submitted:
                my_bar.progress(my_bar_counter+load_bar_integer)
 
 
+
     for _, values in data.items():
         for value in values:
             download.append(value)
+            term_keys.append(_)
+
+
 
     df = pd.DataFrame({'original':term,'suggest': download})
     df = df.drop_duplicates()
