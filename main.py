@@ -5,7 +5,6 @@ import pandas as pd
 import time
 import urllib
 
-st.markdown("![Alt Text](https://c.tenor.com/g5luJt5ki30AAAAC/fortune-teller-crystall-ball.gif)")
 st.title('Topic Suggestions')
 
 
@@ -60,7 +59,6 @@ if bulk_submitted:
     data = {}
     variations = ['what * ', 'is * ', 'who * ', 'how * ', 'does * ', 'why * ', 'can * ', 'where * ', 'when * ', '* ']
     bulk_term_data = pd.read_csv(bulk_term,encoding_errors='xmlcharrefreplace')
-    print(bulk_term_data.iloc[0:-1,0])
     api_progress_counter = 0
     bulk_term_column = bulk_term_data.iloc[:,-1]
 
@@ -80,11 +78,17 @@ if bulk_submitted:
            data[term] = [i for i in response[1]]
            api_progress_counter += 1
 
-           if bulk_term_column[bulk_term_column == term].index == len(bulk_term_column)-1:
-               my_bar.progress(1.0)
-           else:
-               my_bar.progress(my_bar_counter+load_bar_integer)
+           my_bar.progress(round(my_bar_counter+load_bar_integer,1))
 
+#           if bulk_term_column[bulk_term_column == term].index == len(bulk_term_column)-1:
+#               my_bar.progress(roundfloat(1.0,1))
+#               print('FLOATING')
+#           else:
+#               my_bar.progress(my_bar_counter+load_bar_integer)
+#               print(my_bar_counter+load_bar_integer)
+
+    my_bar = st.progress(0.0)
+    my_bar_counter = 0.0
 #add SEMRUSH volume for every found term.
 
     for _, values in data.items():
@@ -101,7 +105,7 @@ if bulk_submitted:
     st.download_button(
         label="Download data as CSV",
         data=csv,
-        file_name=f'google_auto_suggest_{term}.csv',
+        file_name=f'google_auto_suggest_finder.csv',
         mime='text/csv',
     )
 
@@ -111,3 +115,4 @@ if bulk_submitted:
             st.write(value)
 
     st.balloons()
+    my_bar.progress(0.0)
