@@ -6,7 +6,7 @@ For those who remember the "keyword shitter" tool (R.I.P), this is the same but 
 
 you can clone this repo to tweak it to your hearts content.
 
-#for the uninitiated:
+# for the uninitiated:
 
 This tool uses google "suggested queries" functionality to bulk generate variations for your list of keywords.
 
