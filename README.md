@@ -1,8 +1,8 @@
-# keyword generation tool
+# Keyword Variant Generator Tool (pooper)
 
 ## [use this link to try it out for yourself](https://samirhseo-pooper-auto-suggest-main-5ntl8h.streamlitapp.com/)
 
-For those who remember the "keyword shitter" tool (R.I.P), this is the same but with a cleaner interface.
+For those who remember the "keyword shitter" tool (R.I.P), this is effectively the same but with a cleaner interface & some upgrades.
 
 you can clone this repo to tweak it to your hearts content.
 
